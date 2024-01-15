@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked Lists</title>
+</head>
+<body>
+    <script>
+
+        class Node {
+            constructor(value = null, nextNode = null) {
+                this.value = value;
+                this.nextNode = nextNode;
+            }
+        }
+        
+        class LinkedList {
+            constructor(name, firstVal = 'head') {
+                this.name = name;
+                this.head = new Node(firstVal);
+            };
+            
+            append(value, current = this.head) {
+                if (current.nextNode === null) {
+                    current.nextNode = new Node(value);
+                } else {
+                    this.append(value, current.nextNode);
+                }
+            }
+
+            prepend(value) {
+                let current = this.head;
+                this.head.nextNode = current;
+                this.head.value = value;
+            }
+
+            size(node = this.head, num = 0) {
+                if (node.nextNode === null) {
+                    return console.log(num);
+                } else {
+                    num++;
+                    this.size(node.nextNode, num);
+                }
+            }
+
+            head() {
+                return console.log(this.head);
+            }
+
+            tail(node = this.head) {
+                if (node.nextNode === null) {
+                    return console.log(node)
+                } else {
+                    this.tail(node.nextNode);
+                }
+            }
+
+            at(index, node = this.head, num = 0) {
+                if (num === index) {
+                    return console.log(node);
+                } else {
+                    num++;
+                    this.at(index, node.nextNode, num);
+                }
+            }
+
+            pop(node = this.head, prevNode = undefined) {
+                if (node.nextNode === null) {
+                    prevNode.nextNode = null;
+                    return console.log(this);
+                } else {
+                    prevNode = node;
+                    this.pop(node.nextNode, prevNode);
+                }
+            }
+
+            contains(value, node = this.head) {
+                if (node.value === value) {
+                    return console.log('true');
+                } else if (node.nextNode === null) {
+                    return console.log('false');
+                } else {
+                    this.contains(value, node.nextNode);
+                }
+            }
+
+            find(value, node = this.head, index = 0) {
+                if (node.value === value) {
+                    return console.log(index);
+                } else {
+                    index++;
+                    this.find(value, node.nextNode, index);
+                }
+            }
+
+            toString(string = '', node = this.head) {
+                if (node.nextNode === null) {
+                    string = string + `${node.value}`;
+                    return console.log(string);
+                } else {
+                    string = string + `${node.value} -> `;
+                    this.toString(string, node.nextNode);
+                }
+            }
+        }
+        
+        // const newLinkedList = new LinkedList('list');
+        // newLinkedList.append('first');
+        // newLinkedList.append('second');
+        // newLinkedList.append('third');
+        // newLinkedList.append('fourth');
+        // console.log(newLinkedList);
+        // newLinkedList.toString();
+
+    </script>
+</body>
+</html>
+
+
+
